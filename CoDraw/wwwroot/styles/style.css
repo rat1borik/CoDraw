@@ -1,0 +1,127 @@
+* {margin: 0; padding: 0;}
+
+canvas {
+    display: block;
+    background-color: #c0c0c0;
+    margin: 0px 32px 0px 10px;
+}
+
+#clear {
+    background-color: #ff0000;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 0px 32px 5px 10px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border-radius: 15px;
+}
+#clear:hover {
+    background-color: darkgrey;
+    color: white;
+}
+#markerId {
+    background-color: #5178ff;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 0px 32px 5px 10px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    border-radius: 15px;
+}
+#markerId:hover {
+    background-color: darkgrey;
+    color: white;
+}
+#pencilId {
+    background-color: #5178ff;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 0px 32px 5px 10px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border-radius: 15px;
+}
+#pencilId:hover {
+    background-color: darkgrey;
+    color: white;
+}
+#brushId {
+    background-color: #5178ff;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 0px 32px 5px 10px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border-radius: 15px;
+}
+#brushId:hover {
+    background-color: darkgrey;
+    color: white;
+}
+#rubberId {
+    background-color: #5178ff;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 0px 32px 5px 10px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    opacity: 0.6;
+    cursor: not-allowed;
+    border-radius: 15px;
+}
+#rubberId:hover {
+    background-color: darkgrey;
+    color: white;
+}
+
+#indicator {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: grey;
+    margin: 0px 32px 5px 150px;
+}
+
+
+.isWrite {
+    background-color: #5178ff !important;
+}
+
+#sketch {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+    object-fit: contain;
+    z-index: -1;
+}
+
+.listInstrument {
+    margin: 0px 0px 10px 20px;
+}
