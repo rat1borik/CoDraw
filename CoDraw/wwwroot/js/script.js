@@ -19,7 +19,13 @@ window.onload = () => {
     const indicator = document.getElementById('indicator');
     const button = document.getElementById('clear');
     //CanvasAPI
-    
+    const hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/upd")
+        .build();
+
+    hubConnection.on("Notify", function () {
+        request();
+    });
     async function submit() {
         
         let response = await fetch('postCanvas', {
@@ -29,7 +35,7 @@ window.onload = () => {
             },
             body: JSON.stringify(canvas.toDataURL())
         });
-        request()
+        hubConnection.invoke("Notify");
     }
     async function request() {
         let img = new Image()
@@ -38,6 +44,8 @@ window.onload = () => {
             .then(data => img.src = data)
         ctx.drawImage(img,0,0)
     }
+    
+    hubConnection.start();
     request()
     // Устанавливаем размер холста
     canvas.setAttribute('width', 1500);

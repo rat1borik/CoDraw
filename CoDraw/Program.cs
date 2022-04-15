@@ -1,3 +1,4 @@
+using CoDraw;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +7,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -17,5 +19,13 @@ if (app.Environment.IsDevelopment()) {
 
 app.UseStaticFiles();
 app.MapControllers();
+app.UseDefaultFiles();
+
+app.UseRouting();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<UpdateHub>("/upd");
+});
 
 app.Run();
