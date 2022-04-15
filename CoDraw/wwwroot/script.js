@@ -12,15 +12,35 @@ const configBrush = {
 }
 
 window.onload = () => {
-
+    
     // Инициализируем html элементы
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     const indicator = document.getElementById('indicator');
-    const button = document.getElementById('deleteButton')
-
+    const button = document.getElementById('clear');
+    //CanvasAPI
+    
+    async function submit() {
+        
+        let response = await fetch('postCanvas', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(canvas.toDataURL())
+        });
+        request()
+    }
+    async function request() {
+        let img = new Image()
+        let response = await fetch('getCanvas')
+            .then(response => response.text())
+            .then(data => img.src = data)
+        ctx.drawImage(img,0,0)
+    }
+    request()
     // Устанавливаем размер холста
-    canvas.setAttribute('width',1500);
+    canvas.setAttribute('width', 1500);
     canvas.setAttribute('height', 500);
 
     // Иннициализация свойств маркера
@@ -115,6 +135,7 @@ window.onload = () => {
             }
         }
         ctx.beginPath();
+        submit()
     }
 
     // Остановка рисования
@@ -122,6 +143,7 @@ window.onload = () => {
         canvas.onmousemove = null;
         posX.push(undefined);
         posY.push(undefined);
+        submit()
     }
 
     // Изменить цвет индикатора
