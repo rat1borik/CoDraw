@@ -18,13 +18,17 @@ window.onload = () => {
     const ctx = canvas.getContext('2d');
     const indicator = document.getElementById('indicator');
     const button = document.getElementById('clear');
+    const synchroCB = document.getElementById('synchroCB');
     //CanvasAPI
     const hubConnection = new signalR.HubConnectionBuilder()
         .withUrl("/upd")
         .build();
 
-    hubConnection.on("Notify", function () {
+    hubConnection.on("NotifyUpdate", function () {
         request();
+    });
+    hubConnection.on("NotifyClear", function () {
+        deleteDataCanvas();
     });
     async function submit() {
         
@@ -35,7 +39,7 @@ window.onload = () => {
             },
             body: JSON.stringify(canvas.toDataURL())
         });
-        hubConnection.invoke("Notify");
+        hubConnection.invoke("NotifyUpdate");
     }
     async function request() {
         let img = new Image()
@@ -85,7 +89,7 @@ window.onload = () => {
     }
 
     var buttonDelete = document.getElementById("clear")
-    buttonDelete.addEventListener("click", (e) => deleteDataCanvas());
+    buttonDelete.addEventListener("click", (e) => { deleteDataCanvas(); hubConnection.invoke("NotifyClear"); });
 
     function deleteDataCanvas() {
         ctx.clearRect(0, 0, 1500, 500);
@@ -124,7 +128,8 @@ window.onload = () => {
     function recordMousePos(e) {
         posX.push(e.clientX-10);
         posY.push(e.clientY-45);
-        drawLine(e.clientX-10, e.clientY-45);
+        drawLine(e.clientX - 10, e.clientY - 45);
+        if (synchroCB.checked===true)submit()
     }
 
     // Рисование линий
@@ -143,7 +148,6 @@ window.onload = () => {
             }
         }
         ctx.beginPath();
-        submit()
     }
 
     // Остановка рисования

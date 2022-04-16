@@ -23,8 +23,11 @@ namespace CoDraw.Controllers {
 }
 namespace CoDraw { 
     public class UpdateHub : Hub {
-        public async Task Notify() {
-            await this.Clients.All.SendAsync("Notify");
+        public async Task NotifyUpdate() {
+            await this.Clients.All.SendAsync("NotifyUpdate");
+        }
+        public async Task NotifyClear() {
+            await this.Clients.All.SendAsync("NotifyClear");
         }
     }
 }
